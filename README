@@ -1,3 +1,8 @@
+A simple chatbot built with Rasa to help you order drinks!
+
+Python 3.8.18
+Rasa 3.6.17
+
     actions/
 
         actions.py 
