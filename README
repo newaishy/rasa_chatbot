@@ -1,0 +1,111 @@
+    actions/
+
+        actions.py 
+        defines custom actions for the Rasa assistant, using Python code that can be activated upon certain conditions.
+
+    data/ 
+    
+        nlu.yml 
+        defines Natural Language Understanding (NLU) models for the Rasa assistant. This gives the assistant structures to use in identifying user intention and communicated information.
+
+        rules.yml 
+        defines a set of specific actions to take given specific conditions. These should define rule-like behavior, or actions to always take when certain intentions or information are provided by the user.
+
+        stories.yml 
+        models dialogues that the Rasa assistant is expected to engage in. These models are used for training the assistant for conversation, and consist of user intention and/or information annotations, alongside sequences of assistant actions.
+
+    tests/
+
+        test_stories.yml 
+        defines test stories to verify that the Rasa assistant responds as expected.
+
+
+    config.yml 
+    specifies the configuration for training the Rasa assistant. Without specification, Rasa uses a default approach.
+
+    credentials.yml 
+    stores credentials used by the Rasa assistant for interfacing with text and voice chat platforms. The default file includes placeholders for numerous platforms, including Facebook, Slack, and Socket.IO.
+
+    domain.yml 
+    specifies what components from the configurations to include in the Rasa assistant’s “world”. For example, use this to include intents defined in the nlu.yml file or any created actions. This file is also where responses are defined.
+
+    endpoints.yml
+    specifies the different endpoints the Rasa assistant connects to. This includes an endpoint for Rasa to pull a model periodically from a remote server.
+
+![alt text](https://rasa.com/docs/rasa/img/architecture.png)
+
+
+Important commands
+
+
+~ rasa init
+
+initializes new rasa project
+
+~ rasa train
+
+trains a model of the data you provide, according to the parameters, policies, and custom components you have chosen at the configuration.
+
+~ rasa train nlu
+
+trains only the nlu model
+
+~ rasa shell 
+
+creates a “shell” where you can speak with your bot
+
+~ rasa shell --debug 
+
+creates a “shell” where you can speak with your bot AND debug (meaning that you will see what is happening behind the bot, and detect where errors are happening)
+
+~ rasa shell nlu 
+
+creates a “shell” only for the nlu data (the intent and entity recognition)
+
+~ rasa run 
+
+runs a new server with the trained model. A custom-coded client is needed in order to speak with the bot when rasa run is used.
+
+~ rasa run actions
+
+runs the actions server. It is used every time you want to speak with the bot (e.g. rasa shell, rasa interactive)
+
+~ rasa test
+
+automatically tests everything in the folder “tests”, beginning with test_conversations
+
+~ rasa test -s <tests/test_conversations_specific.yml>
+
+automatically tests the specific file you identify, which must start with tests/test_converstations
+
+~ rasa test core 
+
+automatically tests the core data, meaning the stories
+
+~ rasa test nlu 
+
+automatically tests the nlu data
+
+~ rasa test --cross-validation
+
+cross-validation, which automatically creates multiple train/test splits of the data, making the testing more effective
+
+~ rasa interactive -m models/{name_of_model.tar.gz}
+
+opens an interactive shell, whereby speaking with the bot you can add training data to the system. In particular, through this interactive shell, you check whether the intent/entity classification and responses of your bot are correct, and if they aren’t you can correct them. You add the flag -m in order to define which model you want to use for this interactive shell
+
+~ rasa data validate 
+
+verifies that no mistakes or major inconsistencies appear in your domain, NLU data, or story data
+
+~ rasa --version
+
+shows what version of rasa (and rasa-SDK) you are using
+
+~ rasa visualize
+
+visualizes the stories
+
+~ rasa -h
+
+shows all the available commands
